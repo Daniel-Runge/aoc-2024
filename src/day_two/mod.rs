@@ -35,13 +35,7 @@ fn parse(filename: &str) -> Result<Vec<Report>, std::io::Error> {
 
 pub fn day_2_puzzle_1(filename: &str) {
     let mut reports = parse(&filename).unwrap();
-
-    for report in &mut reports {
-        report.safety = check_ascending_safe(&report);
-        if !report.safety {
-            report.safety = check_descending_safe(&report);
-        }
-    }
+    basic_report_safety_set(&mut reports);
     let number_of_safe_reports = reports.iter().filter(|report| report.safety).count();
 
     println!("{}", number_of_safe_reports);
@@ -99,7 +93,6 @@ fn problem_dampener_iterations(report: &Report) -> Vec<Report> {
 
 fn check_ascending_safe(report: &Report) -> bool {
     let levels = report.levels.clone();
-
     levels
         .iter()
         .as_slice()
@@ -109,7 +102,6 @@ fn check_ascending_safe(report: &Report) -> bool {
 
 fn check_descending_safe(report: &Report) -> bool {
     let levels = report.levels.clone();
-
     levels
         .iter()
         .as_slice()
