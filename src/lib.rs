@@ -1,4 +1,5 @@
 mod day_one;
+mod day_two;
 
 #[derive(Debug, Copy, Clone)]
 pub struct AocDay {
@@ -8,12 +9,19 @@ pub struct AocDay {
 }
 
 impl AocDay {
-    pub fn all_days() -> [AocDay; 1] {
-        [AocDay {
-            day: 1,
-            puzzle_1_solution: day_one::day_1_puzzle_1,
-            puzzle_2_solution: day_one::day_1_puzzle_2,
-        }]
+    pub fn all_days() -> [AocDay; 2] {
+        [
+            AocDay {
+                day: 1,
+                puzzle_1_solution: day_one::day_1_puzzle_1,
+                puzzle_2_solution: day_one::day_1_puzzle_2,
+            },
+            AocDay {
+                day: 2,
+                puzzle_1_solution: day_two::day_2_puzzle_1,
+                puzzle_2_solution: day_two::day_2_puzzle_2,
+            },
+        ]
     }
 
     pub fn solve(&self, filename: &str) {

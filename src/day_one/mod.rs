@@ -4,12 +4,12 @@ use std::io::{BufRead, BufReader};
 use std::iter::zip;
 
 fn parse(filename: &str) -> Result<(Vec<i32>, Vec<i32>), std::io::Error> {
-    let f = File::open(filename)?;
-    let file = BufReader::new(&f);
+    let file = File::open(filename)?;
+    let reader = BufReader::new(&file);
     let mut first_list: Vec<i32> = Vec::new();
     let mut second_list: Vec<i32> = Vec::new();
 
-    for line in file.lines() {
+    for line in reader.lines() {
         let temp_line = line?;
         let mut split = temp_line.split_whitespace();
         let x = split.next().unwrap().to_owned();
