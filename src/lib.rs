@@ -26,14 +26,14 @@ impl AocDay {
     }
 
     pub fn solve(&self, filename: &str) {
-        let puzzle_one_now = Instant::now();
+        let puzzle_one_instant = Instant::now();
         (self.puzzle_1_solution)(filename);
-        let elapsed_one = puzzle_one_now.elapsed();
+        let elapsed_one = puzzle_one_instant.elapsed();
         println!("{:?} Puzzle 1 solved in: {:.2?}", self.day, elapsed_one);
 
-        let puzzle_two_now = Instant::now();
+        let puzzle_two_instant = Instant::now();
         (self.puzzle_2_solution)(filename);
-        let elapsed_two = puzzle_two_now.elapsed();
+        let elapsed_two = puzzle_two_instant.elapsed();
         println!("{:?} Puzzle 2 solved in: {:.2?}", self.day, elapsed_two);
     }
 }
