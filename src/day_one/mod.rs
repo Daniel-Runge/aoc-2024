@@ -32,7 +32,7 @@ pub fn day_1_puzzle_1(filename: &str) {
         sum += (first - second).abs();
     }
 
-    println!("{sum}");
+    println!("Day 1 Puzzle 1 solution: {sum}");
 }
 
 pub fn day_1_puzzle_2(filename: &str) {
@@ -57,5 +57,5 @@ pub fn day_1_puzzle_2(filename: &str) {
         similarity_score += key * value;
     }
 
-    println!("{similarity_score}")
+    println!("Day 1 Puzzle 2 solution: {similarity_score}")
 }

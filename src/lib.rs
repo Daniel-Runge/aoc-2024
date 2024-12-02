@@ -29,11 +29,11 @@ impl AocDay {
         let puzzle_one_instant = Instant::now();
         (self.puzzle_1_solution)(filename);
         let elapsed_one = puzzle_one_instant.elapsed();
-        println!("{:?} Puzzle 1 solved in: {:.2?}", self.day, elapsed_one);
+        println!("Day {:?} Puzzle 1 solved in: {:.2?}", self.day, elapsed_one);
 
         let puzzle_two_instant = Instant::now();
         (self.puzzle_2_solution)(filename);
         let elapsed_two = puzzle_two_instant.elapsed();
-        println!("{:?} Puzzle 2 solved in: {:.2?}", self.day, elapsed_two);
+        println!("Day {:?} Puzzle 2 solved in: {:.2?}", self.day, elapsed_two);
     }
 }

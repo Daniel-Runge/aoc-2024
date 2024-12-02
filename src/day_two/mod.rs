@@ -38,7 +38,7 @@ pub fn day_2_puzzle_1(filename: &str) {
     basic_report_safety_set(&mut reports);
     let number_of_safe_reports = reports.iter().filter(|report| report.safety).count();
 
-    println!("{}", number_of_safe_reports);
+    println!("Day 2 Puzzle 1 solution: {}", number_of_safe_reports);
 }
 
 pub fn day_2_puzzle_2(filename: &str) {
@@ -65,7 +65,7 @@ pub fn day_2_puzzle_2(filename: &str) {
         unsafe_reports.iter().filter(|report| report.safety).count();
 
     println!(
-        "{}",
+        "Day 2 Puzzle 2 solution: {}",
         number_of_safe_reports + number_of_safe_dampened_reports
     );
 }
@@ -92,8 +92,8 @@ fn problem_dampener_iterations(report: &Report) -> Vec<Report> {
 }
 
 fn check_ascending_safe(report: &Report) -> bool {
-    let levels = report.levels.clone();
-    levels
+    report
+        .levels
         .iter()
         .as_slice()
         .windows(2)
@@ -101,8 +101,8 @@ fn check_ascending_safe(report: &Report) -> bool {
 }
 
 fn check_descending_safe(report: &Report) -> bool {
-    let levels = report.levels.clone();
-    levels
+    report
+        .levels
         .iter()
         .as_slice()
         .windows(2)
