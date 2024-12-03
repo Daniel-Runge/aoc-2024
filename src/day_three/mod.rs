@@ -3,6 +3,8 @@ use std::io::Read;
 
 #[derive(Debug, Eq, PartialEq)]
 enum Token {
+    DO,
+    DONT,
     MUL,
     NUMBER(i32),
     LPARENS,
@@ -10,40 +12,6 @@ enum Token {
     COMMA,
     TRASH,
 }
-
-// fn lexer(filename: &str) -> Result<Vec<Token>, std::io::Error> {
-//     let mut tokens: Vec<Token> = Vec::new();
-//     let mut file = File::open(filename)?;
-//     let mut contents = String::default();
-//     let read = file.read_to_string(&mut contents)?;
-//     let mut sum = 0;
-//
-//     let a = contents.chars().filter(|character| *character != '\n').collect::<Vec<char>>();
-//
-//     a.as_slice().windows(3).for_each(|c| {
-//         println!("{:?}", c);
-//         match c {
-//             ['m','u','l'] => tokens.push(Token::MUL),
-//             _ => return
-//         }
-//
-//     });
-
-// let mut buffer = [0; 128];
-// loop {
-//     if let read = file.read(&mut buffer)? {
-//         if read == 0 { break; }
-//         let text = &buffer[..read];
-//         // println!("Read: {} bytes", read);
-//         // println!("Read characters: {}", from_utf8(text).unwrap());
-//     }
-//     // break;
-// }
-
-//     println!("{:?}", tokens.len());
-//
-//     Ok(tokens)
-// }
 
 fn lexer(filename: &str) -> Result<Vec<Token>, std::io::Error> {
     let mut tokens = Vec::new();
@@ -55,6 +23,29 @@ fn lexer(filename: &str) -> Result<Vec<Token>, std::io::Error> {
 
     while let Some(character) = iterator.next() {
         match character {
+            'd' => {
+                if let Some('o') = iterator.peek() {
+                    iterator.next();
+                    if let Some('n') = iterator.peek() {
+                        iterator.next();
+                        if let Some('\'') = iterator.peek() {
+                            iterator.next();
+                            if let Some('t') = iterator.peek() {
+                                iterator.next();
+                                tokens.push(Token::DONT);
+                            } else {
+                                tokens.push(Token::TRASH);
+                            }
+                        } else {
+                            tokens.push(Token::TRASH);
+                        }
+                    } else {
+                        tokens.push(Token::DO);
+                    }
+                } else {
+                    tokens.push(Token::TRASH);
+                }
+            }
             'm' => {
                 if let Some('u') = iterator.peek() {
                     iterator.next();
@@ -140,11 +131,31 @@ pub fn day_3_puzzle_1(filename: &str) {
         }
     }
 
-    println!("Day 3 Puzzle 1 solution: {}", result);
+    println!("Day 3 Puzzle 1 solution: {result}");
 }
 
 pub fn day_3_puzzle_2(filename: &str) {
     let tokens = lexer(filename).unwrap();
+    let mut enable_mul = true;
+    let mut result = 0;
 
-    println!("Day 3 Puzzle 2 solution: {}", filename);
+    for token in tokens.windows(6) {
+        match token {
+            [Token::DO, Token::LPARENS, Token::RPARENS, _, _, _] => enable_mul = true,
+            [Token::DONT, Token::LPARENS, Token::RPARENS, _, _, _] => enable_mul = false,
+            _ => enable_mul = enable_mul,
+        }
+
+        match token {
+            [Token::MUL, Token::LPARENS, Token::NUMBER(x), Token::COMMA, Token::NUMBER(y), Token::RPARENS]
+                if enable_mul =>
+            {
+                result += x * y
+            }
+
+            _ => continue,
+        }
+    }
+
+    println!("Day 3 Puzzle 2 solution: {result}");
 }
