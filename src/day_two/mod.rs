@@ -81,7 +81,6 @@ fn basic_report_safety_set(reports: &mut Vec<Report>) {
 
 fn problem_dampener_iterations(report: &Report) -> Vec<Report> {
     let mut dampened_iterations = Vec::new();
-
     for index in 0..report.levels.len() {
         let mut iteration = report.levels.clone();
         iteration.remove(index);

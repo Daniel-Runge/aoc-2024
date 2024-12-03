@@ -1,5 +1,6 @@
 mod day_one;
 mod day_two;
+mod day_three;
 use std::time::Instant;
 
 #[derive(Debug, Copy, Clone)]
@@ -10,7 +11,7 @@ pub struct AocDay {
 }
 
 impl AocDay {
-    pub fn all_days() -> [AocDay; 2] {
+    pub fn all_days() -> [AocDay; 3] {
         [
             AocDay {
                 day: 1,
@@ -21,6 +22,11 @@ impl AocDay {
                 day: 2,
                 puzzle_1_solution: day_two::day_2_puzzle_1,
                 puzzle_2_solution: day_two::day_2_puzzle_2,
+            },
+            AocDay {
+                day: 3,
+                puzzle_1_solution: day_three::day_3_puzzle_1,
+                puzzle_2_solution: day_three::day_3_puzzle_2,
             },
         ]
     }

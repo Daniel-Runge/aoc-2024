@@ -19,5 +19,5 @@ Example with cargo:
 Powershell example:
 
 ```shell
-cargo build ; & "$($Env:USERPROFILE)\RustroverProjects\aoc-2024\target\debug\aoc-2024" 1 data/day-1-puzzle-input.txt
+cargo build --release ; & "$($Env:USERPROFILE)\RustroverProjects\aoc-2024\target\release\aoc-2024" 1 data/day-1-puzzle-input.txt
 ```

@@ -39,22 +39,21 @@ pub fn day_1_puzzle_2(filename: &str) {
     let mut similarity_score = 0;
     let (first_list, second_list) = parse(filename).unwrap();
     let mut hashmap: HashMap<i32, i32> = HashMap::new(); // number:count
-
-    for element in &first_list {
-        let mut count = 0;
-        if hashmap.contains_key(&element) {
-            break;
-        }
-        for similar in &second_list {
-            if element == similar {
-                count += 1;
-            }
-        }
-        hashmap.insert(*element, count);
+    for element in &second_list {
+        hashmap.insert(
+            *element,
+            1 + if hashmap.contains_key(element) {
+                hashmap[element]
+            } else {
+                0
+            },
+        );
     }
 
-    for (key, value) in &hashmap {
-        similarity_score += key * value;
+    for element in &first_list {
+        if hashmap.contains_key(&element) {
+            similarity_score += element * hashmap[element];
+        }
     }
 
     println!("Day 1 Puzzle 2 solution: {similarity_score}")
