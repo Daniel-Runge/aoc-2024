@@ -11,7 +11,7 @@ fn parse(filename: &str) -> Result<(HashMap<i32, HashSet<i32>>, Vec<Vec<i32>>), 
     let mut updates = Vec::<Vec<i32>>::new();
     for line in reader.lines() {
         let line = line?;
-        if let [first, second, other @ ..] =
+        if let [first, second, ..] =
             &line.split("|").map(String::from).collect::<Vec<String>>()[..]
         {
             let first = first.parse::<i32>().unwrap();
